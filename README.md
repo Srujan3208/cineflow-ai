@@ -1,22 +1,19 @@
-# CineFlow AI
+# CineFlow AI — Prompt to Video
 
-Prompt-to-video generation web application.
+Responsive prompt-to-video frontend with a Python rendering worker.
 
-## Architecture
+## Frontend
+- Static app in `web/index.html`
+- Vercel deployment: repository root, output directory `web`, no build command
 
-- Frontend: responsive chat-style web UI
-- API/worker: Python Flask video generation worker
-- Video rendering: cinematic motion graphics pipeline with FFmpeg
-- Database and storage: Supabase (planned integration)
-- Frontend deployment: Vercel
-- Worker deployment: persistent container service (required for rendering)
+## Backend
+The Flask worker in `worker/` runs long video-rendering jobs and must be deployed to a persistent container host (Render/Railway or equivalent), not Vercel serverless.
 
-## Project package
+## Current status
+The frontend source and Vercel configuration are committed. Backend source is still being uploaded. The UI currently requires a running worker at the same origin or a configured API base URL before generation can work.
 
-The complete project package is prepared separately as `cineflow-ai-project.zip` in the development workspace. The source files still need to be uploaded to this repository before Vercel can deploy the full application.
-
-## Deployment notes
-
-Vercel is intended for the frontend. The Python rendering worker must run on a persistent service/container. Configure the frontend API base URL to the worker's deployed URL.
-
-See `docs/DEPLOYMENT.md` once source files are uploaded.
+## Project files
+- `web/`: web interface
+- `worker/`: rendering API and video pipeline
+- `supabase/migrations/`: planned generation history and storage schema
+- `docs/DEPLOYMENT.md`: deployment instructions
